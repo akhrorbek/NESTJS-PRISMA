@@ -1,0 +1,33 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Author {
+    id      String      @map("auth_id")     @db.Uuid
+    name    String      @map("auth_name")   @db.VarChar(54)
+    age     Int?        @map("auth_age")    @db.Integer
+
+
+    books   Books[]
+
+    @@id([id])
+    @@map("author")
+}
+
+model Books {
+  id        String      @map("book_id")     @db.Uuid
+  titlae    String      @map("book_title")  @db.VarChar(45)
+  authorId  String      @map("auth_id")     @db.Uuid
+
+
+  author    Author    @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+
+  @@id([id])
+  @@map("books")
+}
