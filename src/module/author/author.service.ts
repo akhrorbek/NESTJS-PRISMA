@@ -1,5 +1,5 @@
 import { Injectable, Get, Post } from '@nestjs/common';
-import { Author } from '@prisma/client';
+import { Author, Books } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateAuthorDto } from './dto/author.dto';
 
@@ -11,8 +11,15 @@ export class AuthorService {
 
 
     @Get()
-    async getAuthor():Promise<Author[]> {
-        const author = this.prisma.author.findMany()
+    async getAuthor():Promise<any> {
+        const author = this.prisma.author.findMany({
+            select: {
+                id:true,
+                name:true,
+                age:true,
+                books:true
+            }
+        })
         return author
     }
 

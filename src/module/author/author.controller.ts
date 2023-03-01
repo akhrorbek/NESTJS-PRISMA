@@ -11,7 +11,7 @@ export class AuthorController {
     ){}
 
     @Get('/all')
-    getAuthor ():Promise<Author[]> {
+    getAuthor ():Promise<any> {
         return this.authorService.getAuthor()
     }
 
