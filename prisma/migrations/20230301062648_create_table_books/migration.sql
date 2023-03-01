@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "books" (
-    "book_id" UUID NOT NULL DEFAULT gen_random_uuid(),
+    "book_id" UUID NOT NULL,
     "book_title" VARCHAR(45) NOT NULL,
     "auth_id" UUID NOT NULL,
 
