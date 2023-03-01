@@ -6,7 +6,7 @@ import { PrismaClient } from '@prisma/client';
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
     constructor(config: ConfigService) {
         super({
-            dataSource: {
+            datasources: {
                 db: {
                     url:config.getOrThrow<string>('database.url')
                 }

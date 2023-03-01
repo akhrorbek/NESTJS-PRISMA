@@ -6,7 +6,7 @@ import { CustomExceptionFilter } from './filter/custom.exception.filter';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.useGlobalFilters( new CustomExceptionFilter())
+  // app.useGlobalFilters( new CustomExceptionFilter())
 
 
   const config = app.get(ConfigService)
