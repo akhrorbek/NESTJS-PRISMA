@@ -1,4 +1,4 @@
-import { Controller, Get, Post,Patch, Param, Body, ParseUUIDPipe } from '@nestjs/common';
+import { Controller, Get, Post,Patch, Param, Body, ParseUUIDPipe, Delete } from '@nestjs/common';
 import { Books } from '@prisma/client';
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/book.dto';
@@ -25,6 +25,11 @@ export class BookController{
     @Patch('/update/:id')
     updateBook (@Param('id', new ParseUUIDPipe()) id:string, @Body() body:UpdateBookDto) {
         this.bookService.updateBook(id,body)
+    }
+
+    @Delete('/delete/:id')
+    deleteBook (@Param('id', new ParseUUIDPipe()) id:string) {
+        this.bookService.deleteBook(id)
     }
 
 }
