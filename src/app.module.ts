@@ -1,14 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config/dist/config.module';
 import { config } from './config';
-import { AuthorController } from './author/author.controller';
-import { AuthorModule } from './author/author.module';
-import { AuthorService } from './author/author.service';
-import { PrismaService } from './prisma/prisma.service';
+import { AuthorModule } from './module/author/author.module';
+import { BookModule } from './module/book/book.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(config), AuthorModule],
-  providers:[AuthorService,PrismaService],
-  controllers: [AuthorController]
+  imports: [ConfigModule.forRoot(config),PrismaModule, AuthorModule, BookModule],
 })
 export class AppModule {}
