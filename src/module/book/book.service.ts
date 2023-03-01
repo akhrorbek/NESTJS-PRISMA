@@ -1,7 +1,8 @@
-import { Injectable, Get, Post, NotFoundException } from '@nestjs/common';
+import { Injectable, Get, Post, Patch, NotFoundException } from '@nestjs/common';
 import { Books } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateBookDto } from './dto/book.dto';
+import { UpdateBookDto } from './dto/book.update.dto';
 
 @Injectable()
 export class BookService {
@@ -36,6 +37,31 @@ export class BookService {
             }
         })
     }
+
+
+    @Patch()
+    async updateBook(id: string, payload: UpdateBookDto) {
+        const foundBook = await this.prismaService.books.findMany({
+            where: {
+                id:id
+            }
+        })
+        if(!foundBook) {
+            throw new NotFoundException()
+        }
+
+        const book = await this.prismaService.books.update({
+            where: {
+                id: id,
+            },
+            data: {
+                titlae: payload.book_title,
+                authorId: payload.authorId
+            }
+        })
+        return book
+    }
+
 
 
 }
